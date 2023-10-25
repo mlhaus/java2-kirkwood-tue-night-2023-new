@@ -1,15 +1,7 @@
 <%-- These are called directives --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.HashMap" %>
-
-<%-- This is called a scriptlet --%>
-<%
-    Map<String, String> results = (Map<String, String>)request.getAttribute("results");
-    if(results == null) {
-        results = new HashMap<>();
-    }
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- HTML comment -->
 <html>
 <head>
     <title>My Addition App</title>
@@ -25,16 +17,22 @@
             <form method="POST" action="calculator">
                 <div class="form-group mb-2">
                     <label for="firstNumber">First Number:</label>
-                    <input name="firstNum" value="<%= results.containsKey("num1") ? results.get("num1") : "" %>"type="text" class="form-control" id="firstNumber">
+                    <input name="firstNum" value="${results.get("num1")}" type="text" class="form-control" id="firstNumber">
                 </div>
                 <div class="form-group mb-2">
                     <label for="secondNumber">Second Number:</label>
-                    <input name="secondNum" value="<%= results.containsKey("num2") ? results.get("num2") : "" %>" type="text" class="form-control" id="secondNumber">
+                    <input name="secondNum" value="${results.get("num2")}" type="text" class="form-control" id="secondNumber">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            <p><%= results.containsKey("sum") ? results.get("sum") : "" %></p>
-            <p><%= results.containsKey("invalidNumber") ? results.get("invalidNumber") : "" %></p>
+
+            <c:if test="${results.containsKey('sum')}">
+                <p>${results.get("sum")}</p>
+            </c:if>
+            <c:if test="${results.containsKey('invalidNumber')}">
+                <p>${results.get("invalidNumber")}</p>
+            </c:if>
+            
         </div>
     </div>
 </div>

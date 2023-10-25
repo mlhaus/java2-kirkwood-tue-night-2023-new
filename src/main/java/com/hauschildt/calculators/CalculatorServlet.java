@@ -1,3 +1,5 @@
+package com.hauschildt.calculators;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,7 +18,7 @@ public class CalculatorServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("You made a GET request");
+        req.getRequestDispatcher("WEB-INF/calculators/calculator.jsp").forward(req, resp);
     }
 
     @Override
@@ -27,9 +29,9 @@ public class CalculatorServlet extends HttpServlet {
         results.clear();
         results.put("num1", num1);
         results.put("num2", num2);
-        add(num1, num2);
+        add(num1, num2);// DONE
         req.setAttribute("results", results);
-        req.getRequestDispatcher("calculator.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/calculators/calculator.jsp").forward(req, resp);
     }
 
     private void add(String num1, String num2) {
