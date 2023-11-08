@@ -7,6 +7,10 @@
 <body>
 <h1><%= "Hello World!" %></h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<a href="calculator">Adding Calculator</a>
+<br/>
+<a href="convert-temp">Temperature Converter</a>
+<br/>
+<a href="user-json">User Directory</a>
 </body>
 </html>

@@ -15,17 +15,45 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <form class="d-flex" action="user-json" method="get">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q" value="">
-                    <button class="btn btn-light" type="submit">Search</button>
+                <form class="d-flex pt-3" action="user-json" method="get">
+
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q" value="${q}">
+                        <input type="hidden" name="sort" value="${s}">
+                        <input type="hidden" name="state" value="${state}">
+                        <button class="btn btn-light" type="submit">Search</button>
+
+                </form>
+                <form class="d-flex pt-3" action="user-json" method="get">
+
+                    <select name="state" class="form-select" aria-label="Default select example">
+                        <option value="">All</option>
+                        <c:forEach items="${states}" var="s">
+                        <option ${state == s ? 'selected': ''} value="${s}">${s}</option>
+                        </c:forEach>
+                    </select>
+                    <input type="hidden" name="sort" value="${s}">
+                    <input type="hidden" name="q" value="${q}">
+                    <button class="btn btn-light" type="submit">Filter</button>
+
                 </form>
                 <div class="dropdown ms-3">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         Sort
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="sortDropdown">
-                        <li><a class="dropdown-item" href="user-json?sort=az">A to Z</a></li>
-                        <li><a class="dropdown-item" href="user-json?sort=za">Z to A</a></li>
+                        <li><a class="dropdown-item" href="user-json?sort=az&q=${q}&state=${state}">A to Z</a></li>
+                        <li><a class="dropdown-item" href="user-json?sort=za&q=${q}&state=${state}">Z to A</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown ms-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="sortDropdown2" data-bs-toggle="dropdown" aria-expanded="false">
+                        Filter by state
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="sortDropdown2">
+                        <li><a class="dropdown-item" href="user-json?sort=${s}&q=${q}&state=">All</a></li>
+                        <c:forEach items="${states}" var="state">
+                            <li><a class="dropdown-item" href="user-json?sort=${s}&q=${q}&state=${state}">${state}</a></li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
@@ -47,6 +75,28 @@
                 </div>
             </div>
         </c:forEach>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Location</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${users}" var="user" varStatus="status">
+            <tr>
+                <th scope="row">${status.count}</th>
+                <td>${user.name.first}</td>
+                <td>${user.name.last}</td>
+                <td>${user.location.city}, ${user.location.state}</td>
+            </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
 </div>
 
