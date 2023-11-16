@@ -1,4 +1,4 @@
-package com.hauschildt.data;
+package com.hauschildt.data_json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

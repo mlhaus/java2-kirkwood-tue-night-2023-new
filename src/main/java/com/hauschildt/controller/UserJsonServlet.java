@@ -2,9 +2,9 @@ package com.hauschildt.controller;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hauschildt.data.JsonReader;
-import com.hauschildt.data.User;
-import com.hauschildt.data.UserFromJson;
+import com.hauschildt.data_json.JsonReader;
+import com.hauschildt.data_json.User;
+import com.hauschildt.data_json.UserFromJson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

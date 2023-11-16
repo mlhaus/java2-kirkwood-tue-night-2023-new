@@ -1,8 +1,6 @@
-package com.hauschildt.data;
+package com.hauschildt.data_json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.io.Serializable;
 
 public class Picture{
     @JsonProperty("large")
