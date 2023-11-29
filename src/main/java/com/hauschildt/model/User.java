@@ -2,6 +2,8 @@ package com.hauschildt.model;
 
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class User {
     private int id;
@@ -16,6 +18,9 @@ public class User {
     private Instant created_at;
     private Instant last_logged_in;
     private Instant updated_at;
+
+    public User(){
+    }
     
     public User(int id, String firstName, String lastName, String email, String phone, char[] password, String language, String status, String privileges, Instant created_at, Instant last_logged_in, Instant updated_at) {
         this.id = id;
@@ -48,12 +53,38 @@ public class User {
         return email;
     }
 
+    public void setEmail(String email) {
+        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        if(!email.matches(regex)) {
+            throw new IllegalArgumentException("Invalid email address");
+        }
+        this.email = email;
+    }
+
     public String getPhone() {
         return phone;
     }
 
     public char[] getPassword() {
         return password;
+    }
+
+    public void setPassword(char[] password) {
+        String passwordStr = String.valueOf(password);
+        String regex = "^" +
+            "(?=.*[0-9])" + // a digit must occur at least once
+            "(?=.*[a-z])" + // a lower case letter must occur at least once
+            "(?=.*[A-Z])" + // an upper case letter must occur at least once
+            // "(?=.*[!@#$%^&*()+-=])" + // a special character must occur at least once
+            // "(?=\\S+$)" + // no whitespace allowed in the entire string
+            ".{8,}" + // anything, at least eight characters
+            "$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(passwordStr);
+        if(!matcher.matches()) {
+            throw new IllegalArgumentException("Password must contain a minimum of 8 characters, 1 digit, 1 lowercase letter, and 1 uppercase letter.");
+        }
+        this.password = password;
     }
 
     public String getLanguage() {

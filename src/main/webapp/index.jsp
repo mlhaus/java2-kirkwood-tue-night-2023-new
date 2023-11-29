@@ -12,5 +12,9 @@
 <a href="convert-temp">Temperature Converter</a>
 <br/>
 <a href="user-json">User Directory</a>
+<br/>
+<a href="signup">Create New User</a>
+<br/>
+<a href="login">Login</a>
 </body>
 </html>
